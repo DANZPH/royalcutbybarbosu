@@ -1,65 +1,147 @@
+"use client";
+
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
+    <>
+      <main className="pt-[136px]">
+        {/* Hero Section */}
+        <section className="relative h-screen min-h-[800px] flex items-center justify-center overflow-hidden">
+          <div className="absolute inset-0">
             <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
+              alt="Royal cut by Barbosu Hero"
+              className="w-full h-full object-cover"
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuAXVwTMmBUWcUUYdJMIpdjenBU0wFn00Mml3ch7ptOaRg9imJSb88pcLNTBNJ03V18QR9eIVBkZGgogxfKz6fdG8rJUFakYrlZazeDSf6sPgpT0K_xU7P0TGUhjinlbRdTfP_tHqvSjBtRr1W5GeZzCF4wX1yrnJsFkPM0s3mw7t2XQipTU4sRk30e4A8NCWQoSfvubROqNyiNNkyuW8kExcv1FiVMcRJUo3ELk-OX0L2PHtaLB5l9YpwrdRTfGB7rat3bMapn-7z0"
+              fill
+              sizes="100vw"
+              priority
             />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
+            <div className="absolute inset-0 hero-gradient"></div>
+          </div>
+          <div className="relative z-10 text-center px-6 max-w-[900px]">
+            <span className="font-label-caps text-primary-container tracking-[0.3em] uppercase block mb-6">Established Heritage</span>
+            <h1 className="font-display-lg text-white text-display-lg mb-8 text-6xl">Elevated Grooming for the Modern Sovereign</h1>
+            <p className="font-body-lg text-secondary-fixed mb-12 max-w-2xl mx-auto opacity-90 text-lg">
+              Precision techniques meet timeless tradition. Experience the pinnacle of grooming in the heart of Copenhagen.
+            </p>
+            <div className="flex flex-col sm:flex-row justify-center gap-6">
+              <button className="bg-primary-container text-on-primary-container px-12 py-5 font-label-caps uppercase tracking-widest text-sm hover:bg-white transition-colors">
+                Book Appointment
+              </button>
+              <Link href="/services" className="border border-white text-white px-12 py-5 font-label-caps uppercase tracking-widest text-sm hover:bg-white/10 transition-colors">
+                View Services
+              </Link>
+            </div>
+          </div>
+          <div className="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce">
+            <span className="material-symbols-outlined text-white opacity-40">expand_more</span>
+          </div>
+        </section>
+
+        {/* Our Expertise (Bento Grid) */}
+        <section className="py-20 bg-surface">
+          <div className="max-w-[1380px] mx-auto px-6">
+            <div className="flex flex-col md:flex-row justify-between items-end mb-[64px] gap-8">
+              <div className="max-w-xl">
+                <span className="font-label-caps text-primary tracking-widest uppercase block mb-4">The Mastery</span>
+                <h2 className="font-headline-xl text-on-surface text-4xl">Curated Services</h2>
+              </div>
+              <p className="font-body-md text-on-surface-variant max-w-sm">
+                Every service is a meticulous ritual designed to restore character and refine your personal style.
+              </p>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-12 gap-8 h-auto md:h-[800px]">
+              <div className="md:col-span-8 group relative overflow-hidden bg-black">
+                <Image
+                  alt="Signature Haircut"
+                  className="w-full h-full object-cover opacity-80 group-hover:scale-105 transition-transform duration-700"
+                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuDPoVBZLdL69IiIYuaSFMw5ZKhRHvkKoOueyZZrEIwivvUhJJfNQPVHatGwhzbAV0OxbvOOfPCBokiGLdBuCfaZ4pZfqRzDdxkaJdt16zec-Jr1XQyAOQdLjMOAQ5OQ44dkp-zhgLJ-XGblFXQ7iMrULswmanO9Su_vYRfZQjYkmrspy_UWV29TBuN5BXYPa9zs5Czhfccxj0oNJpr6YjUsqpAyjd6ctT8arKxF9UH9xaXKSXrO_hbE1YMSCigcUz_iZXgD8OHbN-M"
+                  fill
+                />
+                <div className="absolute bottom-0 left-0 p-10 bg-gradient-to-t from-black/80 to-transparent w-full">
+                  <h3 className="text-white font-headline-md text-3xl mb-2">Signature Royal Cut</h3>
+                  <p className="text-gray-300 font-body-md mb-4 max-w-md">Precision scissors work and clipper tapering tailored to your head shape and hair texture.</p>
+                  <span className="text-primary-container font-label-caps tracking-widest">FROM 450 DKK</span>
+                </div>
+              </div>
+              <div className="md:col-span-4 flex flex-col gap-8">
+                <div className="flex-1 group relative overflow-hidden bg-black">
+                  <Image
+                    alt="Traditional Shave"
+                    className="w-full h-full object-cover opacity-70 group-hover:scale-105 transition-transform duration-700"
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuDq8-aBlSwSnPyUs38AQEkoi47kHVKSceCdzZDo8-uWv7LLAX8EoukLPZVusTKXYpxM97WGFntjviVPdN7VaeqmCKpF6BHfvG3HARntjd1DRoZtV3QbZsr7JfMtyJAtXSpjIpuiQCzfH98xZ0yoDSQpMllywZFj8B5vQ5sXUKBo-HB3xMEtjwjGtiUA4GQNVwvZ2CdzqpyIKnNwpsJTjakNulLDwp7pQSGEGZ2b6Q0ynm5QA3-8LxjU8Uqd3I9nOBHr564FA0k48e8"
+                    fill
+                  />
+                  <div className="absolute inset-0 flex flex-col justify-end p-8 bg-gradient-to-t from-black/80 to-transparent">
+                    <h3 className="text-white font-headline-md text-2xl mb-1">Ritual Shave</h3>
+                    <span className="text-primary-container font-label-caps tracking-widest">FROM 350 DKK</span>
+                  </div>
+                </div>
+                <div className="flex-1 group relative overflow-hidden bg-black">
+                  <Image
+                    alt="Beard Sculpting"
+                    className="w-full h-full object-cover opacity-70 group-hover:scale-105 transition-transform duration-700"
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuC_dyqEQpyue4Uj4ghpNfACUCwvyXW3BhyWZkaRRkJENz5rw7PK81I7sitQPwnIBIn8GL0CuI7ZKsorsxuO5Zgi1WtPoumt27NJqkNy0FeMY1xqoHxMsgSiobVcpy2-Q0foYYIRgjp2__VZYn7b9yL4--elKyMPQYD1-6z8_8SZpq0N65sJGiYyjF0xqy0qQPW-e8LgiVh9jo5dtPRf2lFqdtMSho4zJPipdjNn-1SehrBfhlpx5iZAR9cyDA9YLyyh2WY14lz9Eg0"
+                    fill
+                  />
+                  <div className="absolute inset-0 flex flex-col justify-end p-8 bg-gradient-to-t from-black/80 to-transparent">
+                    <h3 className="text-white font-headline-md text-2xl mb-1">Beard Sculpting</h3>
+                    <span className="text-primary-container font-label-caps tracking-widest">FROM 250 DKK</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Heritage & Precision Section */}
+        <section className="py-20 bg-inverse-surface text-white">
+          <div className="max-w-[1380px] mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-[96px] items-center">
+            <div className="relative order-2 md:order-1">
+              <div className="aspect-[4/5] overflow-hidden border border-primary/30 relative">
+                <Image
+                  alt="Heritage Detail"
+                  className="w-full h-full object-cover grayscale contrast-125"
+                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuBsgMjtFPOTWVg5poDsJTwGxsw0YQHfh_nbOgpNcGTntV8dk2E-WEohv7MVeZmkgvx5KnpvtN7KYTN_s4n7VZV2CVaKz5cDulgAh-QhHEwmJ-g5S-gP__5mgvUOhDMaRHaXyuDJd2lv6c9vETmNslFHmNPhdhJgsJtwjViMsKbhzutvwUlcqLJirQhvmsz0yahqbfIff0dFSMp_jHvpguYEr4DmgeiEAIa8tj6efLIduuEqEH7zgnzELiG_9YwztCrbqu2eTzZz2zo"
+                  fill
+                />
+              </div>
+              <div className="absolute -bottom-12 -right-12 w-2/3 h-2/3 bg-primary/10 border border-primary/20 -z-10 hidden lg:block"></div>
+            </div>
+            <div className="order-1 md:order-2">
+              <span className="font-label-caps text-primary-container tracking-widest uppercase block mb-6">Our Legacy</span>
+              <h2 className="font-display-lg text-white text-4xl mb-8">Crafted by Tradition, Refined by Precision.</h2>
+              <div className="space-y-6 opacity-80 font-body-lg text-lg">
+                <p>Royal cut by Barbosu was born from a desire to return to the core of men's grooming: the unwavering pursuit of technical perfection and the social ritual of the barbering sanctuary.</p>
+                <p>Located in the heart of Kingosgade, we believe that a haircut is not a transaction, but a statement of identity. Our barbers are trained in both archival techniques and contemporary aesthetics, ensuring that every chair visit results in a look that is both timeless and relevant.</p>
+              </div>
+              <div className="mt-12">
+                <a className="inline-flex items-center gap-4 group" href="#">
+                  <span className="font-label-caps uppercase tracking-[0.2em] group-hover:text-primary-container transition-colors">Learn our story</span>
+                  <div className="h-[1px] w-12 bg-primary-container group-hover:w-24 transition-all"></div>
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* CTA Section */}
+        <section className="py-20 bg-surface-container text-center">
+          <div className="max-w-[800px] mx-auto px-6">
+            <span className="material-symbols-outlined text-primary text-5xl mb-8" style={{ fontVariationSettings: "'FILL' 1" }}>stars</span>
+            <h2 className="font-display-lg text-on-surface text-4xl mb-8">Secure Your Place in the Chair</h2>
+            <p className="font-body-lg text-on-surface-variant mb-12 text-lg">
+              Walk-ins are welcomed, but appointments are honored. Join us for a service that transcends the ordinary.
+            </p>
+            <button className="bg-[#1c1c18] text-[#E7CC89] px-16 py-6 font-label-caps uppercase tracking-widest hover:bg-primary transition-colors">
+              Reserve Your Appointment
+            </button>
+          </div>
+        </section>
       </main>
-    </div>
+    </>
   );
 }
+
