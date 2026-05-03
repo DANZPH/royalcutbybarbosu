@@ -2,27 +2,57 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { useState, useEffect } from "react";
 
 export default function Home() {
+  const images = ["/picture4.jpg", "/picture1.jpg"];
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentImageIndex((prev) => (prev + 1) % images.length);
+    }, 5000);
+    return () => clearInterval(timer);
+  }, [images.length]);
+
   return (
     <>
-      <main className="pt-[136px]">
+      <main className="pt-[40px]">
         {/* Hero Section */}
-        <section className="relative h-screen min-h-[800px] flex items-center justify-center overflow-hidden">
+        <section className="relative h-screen min-h-[700px] flex items-center justify-center overflow-hidden">
           <div className="absolute inset-0">
-            <Image
-              alt="Royal cut by Barbosu Hero"
-              className="w-full h-full object-cover"
-              src="https://lh3.googleusercontent.com/aida-public/AB6AXuAXVwTMmBUWcUUYdJMIpdjenBU0wFn00Mml3ch7ptOaRg9imJSb88pcLNTBNJ03V18QR9eIVBkZGgogxfKz6fdG8rJUFakYrlZazeDSf6sPgpT0K_xU7P0TGUhjinlbRdTfP_tHqvSjBtRr1W5GeZzCF4wX1yrnJsFkPM0s3mw7t2XQipTU4sRk30e4A8NCWQoSfvubROqNyiNNkyuW8kExcv1FiVMcRJUo3ELk-OX0L2PHtaLB5l9YpwrdRTfGB7rat3bMapn-7z0"
-              fill
-              sizes="100vw"
-              priority
-            />
+            {images.map((src, index) => (
+              <div
+                key={src}
+                className={`absolute inset-0 transition-opacity duration-1000 ${
+                  index === currentImageIndex ? "opacity-100" : "opacity-0"
+                }`}
+              >
+                <Image
+                  alt={`Royal cut by Barbosu Hero ${index + 1}`}
+                  className="w-full h-full object-cover"
+                  src={src}
+                  fill
+                  sizes="100vw"
+                  priority={index === 0}
+                />
+              </div>
+            ))}
             <div className="absolute inset-0 hero-gradient"></div>
           </div>
           <div className="relative z-10 text-center px-6 max-w-[900px]">
-            <span className="font-label-caps text-primary-container tracking-[0.3em] uppercase block mb-6">Established Heritage</span>
-            <h1 className="font-display-lg text-white text-display-lg mb-8 text-6xl">Elevated Grooming for the Modern Sovereign</h1>
+            {/* <span className="font-label-caps text-white tracking-[0.3em] uppercase block mb-6">Established Heritage</span> */}
+            <div className="flex justify-center">
+              <Image
+                src="/crown.png"
+                alt="Royal Crown"
+                width={80}
+                height={80}
+                className="md:w-60 h-auto opacity-80"
+              />
+            </div>
+            <h1 className="font-display-lg text-primary-container mb-2 text-6xl md:text-8xl">ROYAL CUT</h1>
+            <h2 className="text-primary-container text-5xl md:text-7xl mb-12" style={{ fontFamily: "var(--font-ephesis)" }}>by Barbosu</h2>
             <p className="font-body-lg text-secondary-fixed mb-12 max-w-2xl mx-auto opacity-90 text-lg">
               Precision techniques meet timeless tradition. Experience the pinnacle of grooming in the heart of Copenhagen.
             </p>
@@ -57,8 +87,9 @@ export default function Home() {
                 <Image
                   alt="Signature Haircut"
                   className="w-full h-full object-cover opacity-80 group-hover:scale-105 transition-transform duration-700"
-                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuDPoVBZLdL69IiIYuaSFMw5ZKhRHvkKoOueyZZrEIwivvUhJJfNQPVHatGwhzbAV0OxbvOOfPCBokiGLdBuCfaZ4pZfqRzDdxkaJdt16zec-Jr1XQyAOQdLjMOAQ5OQ44dkp-zhgLJ-XGblFXQ7iMrULswmanO9Su_vYRfZQjYkmrspy_UWV29TBuN5BXYPa9zs5Czhfccxj0oNJpr6YjUsqpAyjd6ctT8arKxF9UH9xaXKSXrO_hbE1YMSCigcUz_iZXgD8OHbN-M"
+                  src="/picture3.jpg"
                   fill
+                  priority
                 />
                 <div className="absolute bottom-0 left-0 p-10 bg-gradient-to-t from-black/80 to-transparent w-full">
                   <h3 className="text-white font-headline-md text-3xl mb-2">Signature Royal Cut</h3>

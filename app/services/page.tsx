@@ -95,7 +95,7 @@ export default function ServicesPage() {
           <div className="md:col-span-8 flex flex-col gap-12">
             <div className="h-[500px] w-full overflow-hidden relative">
               <Image
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuDjLhIKlnToqCcOcTM---aKfNmST5gMLO5b9L-MPlWndn9g1qRs9_xx9m1lB7ee1IYIG9i7AgZnLF8d2HjnLXdH9hF2ZKgsL1iufo8U-9Wy64_KzWTqp8XrvuwT3cRDOhMGv_uwt256GmJ8TA3QkaZtVqcPTRq9fWGpVqbMlJMHDsa3ZK_png9TMWVnl13UNg9lg2-IWbuLx8cBePm9lFsM8riWHi1vjsN-xD6OcuKeePWAfYSphgJALrWJJtXVRR2I_8_aOUKRuKQ"
+                src="/picture1.jpg"
                 alt="Minimalist, high-end barbershop interior"
                 fill
                 sizes="(max-width: 768px) 100vw, 66vw"
@@ -193,11 +193,11 @@ export default function ServicesPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
             <div className="order-2 md:order-1 relative aspect-[4/5] w-full">
               <Image
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuCJ0P2otVZ-g-_4QUv1S9RrFI8OHRrLensUKKiunFPzUhAddvSc2IBtXr5dwyXX9a1MAlem8x13u4xYz5nFH4ITGIQ0tviVrljyN8JLhsUpa_c_JWI0mCqESiY0i70zoQRjWo-vlfZn6VOY2vkbOaoxWOjMqkHEs4BV_bq7MhNUUTFFTYvcHE0ve-Fp3r1_d6L5Sz7bdfHsBeO260NLWwPPmisfPv0K4Z9whtQdOggizu9V3mqCjEdidcgBIUqLjk_Q26yQLwXR_M8"
+                src="/picture6.jpg"
                 alt="Distinguished gentleman receiving a luxury grooming service"
                 fill
                 sizes="(max-width: 768px) 100vw, 50vw"
-                className="object-cover"
+                className="object-cover grayscale brightness-70"
               />
             </div>
             <div className="order-1 md:order-2 flex flex-col gap-8">

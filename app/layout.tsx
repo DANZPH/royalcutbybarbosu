@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Noto_Serif, Manrope } from "next/font/google";
+import { Noto_Serif, Manrope, Ephesis } from "next/font/google";
 import "./globals.css";
 import Link from "next/link";
 import Navbar from "./components/Navbar";
@@ -17,9 +17,15 @@ const manrope = Manrope({
   weight: ["400", "700"],
 });
 
+const ephesis = Ephesis({
+  variable: "--font-ephesis",
+  subsets: ["latin"],
+  weight: ["400"],
+});
+
 export const metadata: Metadata = {
   title: "Royal cut by Barbosu",
-  description: "Elevated Grooming for the Modern Sovereign",
+  description: "Kingosgade 3, 1623 København",
 };
 
 export default function RootLayout({
@@ -35,7 +41,10 @@ export default function RootLayout({
           rel="stylesheet"
         />
       </head>
-      <body className={`${notoSerif.variable} ${manrope.variable} font-body-md text-on-background antialiased`}>
+      <body 
+        className={`${notoSerif.variable} ${manrope.variable} ${ephesis.variable} font-body-md text-on-background antialiased`}
+        suppressHydrationWarning
+      >
         <Navbar />
         {children}
         <Footer />
