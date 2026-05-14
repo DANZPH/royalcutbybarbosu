@@ -4,7 +4,7 @@ export default function LocationsPage() {
   return (
     <main className="pt-[136px]">
       {/* Hero Section */}
-      <section className="relative h-[819px] w-full overflow-hidden flex items-end">
+      <section className="relative h-[520px] sm:h-[640px] md:h-[819px] w-full overflow-hidden flex items-end">
         <Image
           className="absolute inset-0 w-full h-full object-cover grayscale contrast-125"
           alt="Royal Cut by Barbosu Storefront"
@@ -14,28 +14,28 @@ export default function LocationsPage() {
           sizes="100vw"
         />
         <div className="absolute inset-0 hero-gradient"></div>
-        <div className="relative max-w-[1380px] mx-auto px-6 pb-20 w-full">
+        <div className="relative max-w-[1380px] mx-auto px-6 pb-12 sm:pb-16 md:pb-20 w-full">
           <span className="font-label-caps text-primary-container uppercase tracking-[0.3em] mb-4 block">
             Vesterbro Atelier
           </span>
-          <h1 className="font-display-lg text-white text-6xl md:text-[64px]">
+          <h1 className="font-display-lg text-white text-3xl sm:text-5xl md:text-[64px]">
             Kingosgade 3, København
           </h1>
         </div>
       </section>
 
       {/* Content Split Section: Info & Map */}
-      <section className="max-w-[1380px] mx-auto py-[120px] px-6 grid grid-cols-1 lg:grid-cols-12 gap-16">
+      <section className="max-w-[1380px] mx-auto py-16 sm:py-24 md:py-[120px] px-6 grid grid-cols-1 lg:grid-cols-12 gap-12 md:gap-16">
         {/* Address and Hours (5/12) */}
         <div className="lg:col-span-5 flex flex-col justify-center">
           <div className="mb-12">
             <span className="font-label-caps text-primary uppercase tracking-widest mb-6 block">
               Visit Us
             </span>
-            <h2 className="font-headline-xl text-4xl mb-6">
+            <h2 className="font-headline-xl text-2xl sm:text-4xl mb-6">
               Heritage Precision in the Heart of the City
             </h2>
-            <p className="font-body-lg text-on-surface-variant mb-8 max-w-md text-lg">
+            <p className="font-body-lg text-on-surface-variant mb-8 max-w-md text-base sm:text-lg">
               Our Copenhagen atelier represents the pinnacle of grooming. Located
               in the vibrant district of Vesterbro, we offer a secluded retreat for
               those who seek mastery in every cut.
@@ -63,8 +63,8 @@ export default function LocationsPage() {
               </div>
             </div>
           </div>
-          <div className="p-8 bg-surface-container border border-outline-variant">
-            <h3 className="font-headline-md mb-6 text-xl">Opening Hours</h3>
+          <div className="p-6 sm:p-8 bg-surface-container border border-outline-variant">
+            <h3 className="font-headline-md mb-6 text-lg sm:text-xl">Opening Hours</h3>
             <div className="space-y-4 font-body-md">
               <div className="flex justify-between border-b border-outline-variant pb-2">
                 <span className="text-on-surface-variant">Monday — Friday</span>
@@ -85,7 +85,7 @@ export default function LocationsPage() {
         </div>
 
         {/* Map Section (7/12) */}
-        <div className="lg:col-span-7 h-[600px] bg-stone-900 relative overflow-hidden group">
+        <div className="lg:col-span-7 h-[360px] sm:h-[500px] lg:h-[600px] bg-stone-900 relative overflow-hidden group">
           <iframe
             width="100%"
             height="100%"
@@ -103,13 +103,13 @@ export default function LocationsPage() {
       </section>
 
       {/* Getting There Section */}
-      <section className="bg-surface-container-high py-[120px] border-t border-outline-variant">
-        <div className="max-w-[1380px] mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-12">
+      <section className="bg-surface-container-high py-16 sm:py-24 md:py-[120px] border-t border-outline-variant">
+        <div className="max-w-[1380px] mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-12">
           <div className="space-y-4">
             <span className="material-symbols-outlined text-primary text-4xl">
               directions_walk
             </span>
-            <h4 className="font-headline-md text-2xl">Arrival by Foot</h4>
+            <h4 className="font-headline-md text-xl sm:text-2xl">Arrival by Foot</h4>
             <p className="font-body-md text-on-surface-variant">
               Located just steps from Vesterbrogade, our entrance is distinguished
               by our heritage gold insignia. We are a 10-minute walk from the
@@ -120,7 +120,7 @@ export default function LocationsPage() {
             <span className="material-symbols-outlined text-primary text-4xl">
               directions_car
             </span>
-            <h4 className="font-headline-md text-2xl">Parking</h4>
+            <h4 className="font-headline-md text-xl sm:text-2xl">Parking</h4>
             <p className="font-body-md text-on-surface-variant">
               Street parking is available on Kingosgade and surrounding side
               streets. Public garages are located on Vesterbros Torv, a 3-minute
@@ -131,7 +131,7 @@ export default function LocationsPage() {
             <span className="material-symbols-outlined text-primary text-4xl">
               train
             </span>
-            <h4 className="font-headline-md text-2xl">Public Transit</h4>
+            <h4 className="font-headline-md text-xl sm:text-2xl">Public Transit</h4>
             <p className="font-body-md text-on-surface-variant">
               The nearest Metro station is Frederiksberg Allé (M3 Cityring). Bus
               lines 7A and 26 stop directly at Vesterbrogade / Kingosgade.
@@ -141,7 +141,7 @@ export default function LocationsPage() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-[120px] text-center bg-surface">
+      <section className="py-16 sm:py-24 md:py-[120px] text-center bg-surface">
         <div className="max-w-[800px] mx-auto px-6">
           <span
             className="material-symbols-outlined text-[#E7CC89] text-5xl mb-8"
@@ -149,18 +149,18 @@ export default function LocationsPage() {
           >
             content_cut
           </span>
-          <h2 className="font-headline-xl text-5xl md:text-[48px] mb-8 leading-[1.2]">
+          <h2 className="font-headline-xl text-3xl sm:text-5xl md:text-[48px] mb-6 sm:mb-8 leading-[1.2]">
             Ready to define your legacy?
           </h2>
-          <p className="font-body-lg text-on-surface-variant mb-12 text-lg leading-[1.6]">
+          <p className="font-body-lg text-on-surface-variant mb-10 sm:mb-12 text-base sm:text-lg leading-[1.6]">
             Our master barbers are ready to craft your individual style with the
             precision of centuries-old tradition.
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-6">
             <Link href="/book-now">
-            <button className="bg-primary text-white px-16 py-5 font-label-caps uppercase tracking-widest text-sm hover:opacity-90 transition-all">
-              Book Service
-            </button>
+              <button className="bg-primary text-white px-12 sm:px-16 py-4 sm:py-5 font-label-caps uppercase tracking-widest text-xs sm:text-sm hover:opacity-90 transition-all">
+                Book Service
+              </button>
             </Link>
           </div>
         </div>

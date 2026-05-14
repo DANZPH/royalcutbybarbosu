@@ -4,6 +4,7 @@ import "./globals.css";
 import Link from "next/link";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
+import FloatingCallButton from "./components/FloatingCallButton";
 
 const notoSerif = Noto_Serif({
   variable: "--font-noto-serif",
@@ -48,6 +49,7 @@ export default function RootLayout({
         <Navbar />
         {children}
         <Footer />
+        <FloatingCallButton />
       </body>
     </html>
   );
