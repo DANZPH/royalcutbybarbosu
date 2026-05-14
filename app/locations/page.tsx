@@ -1,5 +1,5 @@
 import Image from "next/image";
-
+import Link from 'next/link';
 export default function LocationsPage() {
   return (
     <main className="pt-[136px]">
@@ -8,7 +8,7 @@ export default function LocationsPage() {
         <Image
           className="absolute inset-0 w-full h-full object-cover grayscale contrast-125"
           alt="Royal Cut by Barbosu Storefront"
-          src="https://lh3.googleusercontent.com/aida-public/AB6AXuAxlv5tlGMsN-FfrqKu5xKCUjIkYCZl_fDZtJcqeldvAMYnsEtbUcds9twcxAveUwF7xTMggrMNq39Mn1zxLhhoZBGcjpAl8I9kYG6u1S5Bcg6giSeiLSgQszXkyagI3HK0iW5ZJchAoBK7tHaN4jTTOhLKOUkdaahcD4UKQOFLZzmXDBsUnqiwkdATqFSH_-UQUySaMWXlPnrAJ8QhQ0ZttLDcy3ujluCN4VtT3xhxfglFtJlC1MwCsZlzwE4452w-SWt-5KhB8uo"
+          src="/location.png"
           fill
           priority
           sizes="100vw"
@@ -84,25 +84,21 @@ export default function LocationsPage() {
           </div>
         </div>
 
-        {/* Map Placeholder (7/12) */}
-        <div className="lg:col-span-7 h-[600px] bg-stone-200 relative overflow-hidden group">
-          <Image
-            className="w-full h-full object-cover grayscale opacity-80 group-hover:opacity-100 transition-opacity duration-700"
-            alt="Copenhagen Map Location"
-            src="https://lh3.googleusercontent.com/aida-public/AB6AXuDTk2eglyTJhVA0UAwNS3c2gkCubyvG0f_I5OU8KlbUW2RW92Mu5n8BVFShPC7BPErPKMIWMSS0oYrrCJYCW2dkeRGqvYIBqJ6GqVNQZcTd0galdvFxe7EewsoNkTTovmtsw9qSd0RvEZVvepihrhVVDOQUho_SAvYG4V8Bw0ni-IVXeydrQdNCWiVVCAVxJb9PXsMi_JhbXDivY1xxTYXFUJsgxuBCNYAmI3k7lFkbNE3fJvqvoUpcOWLACOmQNIidyg3IZVfJE_o"
-            fill
-            sizes="(max-width: 1024px) 100vw, 58vw"
-          />
-          <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-            <div className="w-12 h-12 bg-primary flex items-center justify-center rounded-full animate-pulse">
-              <span
-                className="material-symbols-outlined text-on-primary"
-                style={{ fontVariationSettings: "'FILL' 1" }}
-              >
-                location_on
-              </span>
-            </div>
-          </div>
+        {/* Map Section (7/12) */}
+        <div className="lg:col-span-7 h-[600px] bg-stone-900 relative overflow-hidden group">
+          <iframe
+            width="100%"
+            height="100%"
+            style={{ 
+              border: 0, 
+              filter: 'grayscale(0.5)' // Dark theme effect
+            }}
+            loading="lazy"
+            allowFullScreen
+            referrerPolicy="no-referrer-when-downgrade"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2249.799797204561!2d12.539824677271813!3d55.67323819808386!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x465253755452f1d9%3A0x6d36e2f1837f4d2f!2sKingosgade%203%2C%201623%20K%C3%B8benhavn%2C%20Denmark!5e0!3m2!1sen!2sdk!4v1715694000000!5m2!1sen!2sdk"
+            className="hover:opacity-100 transition-opacity duration-700"
+          ></iframe>
         </div>
       </section>
 
@@ -161,9 +157,11 @@ export default function LocationsPage() {
             precision of centuries-old tradition.
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-6">
+            <Link href="/book-now">
             <button className="bg-primary text-white px-16 py-5 font-label-caps uppercase tracking-widest text-sm hover:opacity-90 transition-all">
               Book Service
             </button>
+            </Link>
           </div>
         </div>
       </section>

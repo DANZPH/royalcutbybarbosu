@@ -57,9 +57,12 @@ export default function Home() {
               Precision techniques meet timeless tradition. Experience the pinnacle of grooming in the heart of Copenhagen.
             </p>
             <div className="flex flex-col sm:flex-row justify-center gap-6">
-              <button className="bg-primary-container text-on-primary-container px-12 py-5 font-label-caps uppercase tracking-widest text-sm hover:bg-white transition-colors">
+              <Link 
+                href="/book-now" 
+                className="bg-primary-container text-on-primary-container px-12 py-5 font-label-caps uppercase tracking-widest text-sm hover:bg-white transition-colors"
+              >
                 Book Appointment
-              </button>
+              </Link>
               <Link href="/services" className="border border-white text-white px-12 py-5 font-label-caps uppercase tracking-widest text-sm hover:bg-white/10 transition-colors">
                 View Services
               </Link>
@@ -166,9 +169,12 @@ export default function Home() {
             <p className="font-body-lg text-on-surface-variant mb-12 text-lg">
               Walk-ins are welcomed, but appointments are honored. Join us for a service that transcends the ordinary.
             </p>
-            <button className="bg-[#1c1c18] text-[#E7CC89] px-16 py-6 font-label-caps uppercase tracking-widest hover:bg-primary transition-colors">
+            <Link 
+              href="/book-now" 
+              className="bg-[#1c1c18] text-[#E7CC89] px-16 py-6 font-label-caps uppercase tracking-widest hover:bg-primary transition-colors inline-block"
+            >
               Reserve Your Appointment
-            </button>
+            </Link>
           </div>
         </section>
       </main>

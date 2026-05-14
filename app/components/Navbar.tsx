@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
 
@@ -42,9 +43,23 @@ export default function Navbar() {
       </div>
 
       {/* TopAppBar */}
-      <header className={`fixed top-[40px] w-full h-[96px] bg-white backdrop-blur-md border-b border-[#E7CC89]/20 z-50 transition-all duration-300 ${isVisible ? "translate-y-0" : "-translate-y-full -translate-y-[40px] opacity-0 pointer-events-none"}`}>
-        <div className="flex justify-between items-center px-6 max-w-[1380px] mx-auto w-full h-full">
-          <Link href="/" className="text-2xl font-serif font-bold text-black tracking-tight">Royal cut by Barbosu</Link>
+      <header className={`fixed top-[40px] w-full h-[96px] bg-white/90 backdrop-blur-md border-b border-[#E7CC89]/20 z-50 transition-all duration-300 ${isVisible ? "translate-y-0" : "-translate-y-full -translate-y-[40px] opacity-0 pointer-events-none"}`}>
+        <div 
+          className="flex justify-between items-center px-6 max-w-[1380px] mx-auto w-full h-full"
+          id="main-navbar"
+          data-visible={isVisible}
+        >
+          <Link href="/" className="flex flex-col items-center">
+            <Image
+              src="/crown.png"
+              alt="Royal Crown"
+              width={42}
+              height={42}
+              className="h-auto opacity-80 mb-1"
+            />
+            <span className="text-xl font-serif font-bold text-black tracking-tight leading-none">ROYAL CUT</span>
+            <span className="text-xl text-gray-600" style={{ fontFamily: "var(--font-ephesis)" }}>by Barbosu</span>
+          </Link>
           <nav className="hidden md:flex gap-8 items-center h-full">
             <Link className={navLinkClass("/")} href="/">Heritage</Link>
             <Link className={navLinkClass("/services")} href="/services">Services</Link>
@@ -52,9 +67,12 @@ export default function Navbar() {
           </nav>
           <div className="flex items-center gap-6">
             <span className="font-serif text-[#705c25] uppercase tracking-widest text-sm hidden lg:block">91939263</span>
-            <button className="bg-[#1c1c18] text-[#e7cc89] px-6 py-3 font-label-caps uppercase tracking-widest hover:opacity-90 transition-opacity">
+            <Link 
+              href="/book-now" 
+              className="bg-[#1c1c18] text-[#e7cc89] px-6 py-3 font-label-caps uppercase tracking-widest hover:opacity-90 transition-opacity"
+            >
               Book Now
-            </button>
+            </Link>
           </div>
         </div>
       </header>
