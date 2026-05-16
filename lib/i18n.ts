@@ -65,7 +65,7 @@ export const MESSAGES = {
           price: "FRA 450 DKK",
         },
         ritual: {
-          title: "Rituel barbering",
+          title: "barbering",
           price: "FRA 350 DKK",
         },
         beard: {
@@ -383,7 +383,7 @@ export const MESSAGES = {
           price: "FROM 450 DKK",
         },
         ritual: {
-          title: "Ritual Shave",
+          title: "Shave",
           price: "FROM 350 DKK",
         },
         beard: {
