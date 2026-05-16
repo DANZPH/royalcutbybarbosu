@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
 import {
   buildLocalePathname,
@@ -15,7 +15,6 @@ import { useI18n } from "@/lib/useI18n";
 
 export default function Navbar() {
   const pathname = usePathname();
-  const searchParams = useSearchParams();
   const router = useRouter();
   const { locale, messages } = useI18n();
   const [isVisible, setIsVisible] = useState(true);
@@ -62,7 +61,7 @@ export default function Navbar() {
       return;
     }
     const nextPathname = buildLocalePathname(pathname, nextLocale);
-    const queryString = searchParams?.toString();
+    const queryString = typeof window !== "undefined" ? window.location.search.replace(/^\?/, "") : "";
     const nextUrl = queryString ? `${nextPathname}?${queryString}` : nextPathname;
     document.cookie = `NEXT_LOCALE=${nextLocale}; path=/; max-age=31536000`;
     router.replace(nextUrl);
