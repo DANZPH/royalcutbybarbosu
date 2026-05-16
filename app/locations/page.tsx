@@ -1,13 +1,23 @@
+"use client";
+
 import Image from "next/image";
 import Link from 'next/link';
+import { buildLocalePathname } from "@/lib/i18n";
+import { useI18n } from "@/lib/useI18n";
 export default function LocationsPage() {
+  const { locale, messages } = useI18n();
+
+  const getLocalizedHref = (path: string) => {
+    return buildLocalePathname(path, locale);
+  };
+
   return (
     <main className="pt-[136px]">
       {/* Hero Section */}
       <section className="relative h-[520px] sm:h-[640px] md:h-[819px] w-full overflow-hidden flex items-end">
         <Image
           className="absolute inset-0 w-full h-full object-cover grayscale contrast-125"
-          alt="Royal Cut by Barbosu Storefront"
+          alt={messages.locations.hero.alt}
           src="/location.png"
           fill
           priority
@@ -16,10 +26,10 @@ export default function LocationsPage() {
         <div className="absolute inset-0 hero-gradient"></div>
         <div className="relative max-w-[1380px] mx-auto px-6 pb-12 sm:pb-16 md:pb-20 w-full">
           <span className="font-label-caps text-primary-container uppercase tracking-[0.3em] mb-4 block">
-            Vesterbro Atelier
+            {messages.locations.hero.label}
           </span>
           <h1 className="font-display-lg text-white text-3xl sm:text-5xl md:text-[64px]">
-            Kingosgade 3, København
+            {messages.locations.hero.title}
           </h1>
         </div>
       </section>
@@ -30,15 +40,13 @@ export default function LocationsPage() {
         <div className="lg:col-span-5 flex flex-col justify-center">
           <div className="mb-12">
             <span className="font-label-caps text-primary uppercase tracking-widest mb-6 block">
-              Visit Us
+              {messages.locations.visit.label}
             </span>
             <h2 className="font-headline-xl text-2xl sm:text-4xl mb-6">
-              Heritage Precision in the Heart of the City
+              {messages.locations.visit.title}
             </h2>
             <p className="font-body-lg text-on-surface-variant mb-8 max-w-md text-base sm:text-lg">
-              Our Copenhagen atelier represents the pinnacle of grooming. Located
-              in the vibrant district of Vesterbro, we offer a secluded retreat for
-              those who seek mastery in every cut.
+              {messages.locations.visit.description}
             </p>
             <div className="space-y-6">
               <div className="flex items-start gap-4">
@@ -47,7 +55,7 @@ export default function LocationsPage() {
                 </span>
                 <div>
                   <p className="font-bold uppercase tracking-wider text-xs mb-1">
-                    Address
+                    {messages.locations.visit.addressLabel}
                   </p>
                   <p className="font-body-md">Kingosgade 3, 1623 København</p>
                 </div>
@@ -56,7 +64,7 @@ export default function LocationsPage() {
                 <span className="material-symbols-outlined text-primary">call</span>
                 <div>
                   <p className="font-bold uppercase tracking-wider text-xs mb-1">
-                    Contact
+                    {messages.locations.visit.contactLabel}
                   </p>
                   <p className="font-body-md">91939263</p>
                 </div>
@@ -64,20 +72,20 @@ export default function LocationsPage() {
             </div>
           </div>
           <div className="p-6 sm:p-8 bg-surface-container border border-outline-variant">
-            <h3 className="font-headline-md mb-6 text-lg sm:text-xl">Opening Hours</h3>
+            <h3 className="font-headline-md mb-6 text-lg sm:text-xl">{messages.locations.hours.title}</h3>
             <div className="space-y-4 font-body-md">
               <div className="flex justify-between border-b border-outline-variant pb-2">
-                <span className="text-on-surface-variant">Monday — Friday</span>
+                <span className="text-on-surface-variant">{messages.locations.hours.monFri}</span>
                 <span className="font-medium">09:00 - 18:00</span>
               </div>
               <div className="flex justify-between border-b border-outline-variant pb-2">
-                <span className="text-on-surface-variant">Saturday</span>
+                <span className="text-on-surface-variant">{messages.locations.hours.saturday}</span>
                 <span className="font-medium">10:00 - 16:00</span>
               </div>
               <div className="flex justify-between">
-                <span className="text-on-surface-variant">Sunday</span>
+                <span className="text-on-surface-variant">{messages.locations.hours.sunday}</span>
                 <span className="text-primary font-bold uppercase tracking-tighter">
-                  Closed
+                  {messages.locations.hours.closed}
                 </span>
               </div>
             </div>
@@ -109,32 +117,27 @@ export default function LocationsPage() {
             <span className="material-symbols-outlined text-primary text-4xl">
               directions_walk
             </span>
-            <h4 className="font-headline-md text-xl sm:text-2xl">Arrival by Foot</h4>
+            <h4 className="font-headline-md text-xl sm:text-2xl">{messages.locations.gettingThere.walk.title}</h4>
             <p className="font-body-md text-on-surface-variant">
-              Located just steps from Vesterbrogade, our entrance is distinguished
-              by our heritage gold insignia. We are a 10-minute walk from the
-              Central Station.
+              {messages.locations.gettingThere.walk.description}
             </p>
           </div>
           <div className="space-y-4">
             <span className="material-symbols-outlined text-primary text-4xl">
               directions_car
             </span>
-            <h4 className="font-headline-md text-xl sm:text-2xl">Parking</h4>
+            <h4 className="font-headline-md text-xl sm:text-2xl">{messages.locations.gettingThere.parking.title}</h4>
             <p className="font-body-md text-on-surface-variant">
-              Street parking is available on Kingosgade and surrounding side
-              streets. Public garages are located on Vesterbros Torv, a 3-minute
-              walk away.
+              {messages.locations.gettingThere.parking.description}
             </p>
           </div>
           <div className="space-y-4">
             <span className="material-symbols-outlined text-primary text-4xl">
               train
             </span>
-            <h4 className="font-headline-md text-xl sm:text-2xl">Public Transit</h4>
+            <h4 className="font-headline-md text-xl sm:text-2xl">{messages.locations.gettingThere.transit.title}</h4>
             <p className="font-body-md text-on-surface-variant">
-              The nearest Metro station is Frederiksberg Allé (M3 Cityring). Bus
-              lines 7A and 26 stop directly at Vesterbrogade / Kingosgade.
+              {messages.locations.gettingThere.transit.description}
             </p>
           </div>
         </div>
@@ -150,16 +153,15 @@ export default function LocationsPage() {
             content_cut
           </span>
           <h2 className="font-headline-xl text-3xl sm:text-5xl md:text-[48px] mb-6 sm:mb-8 leading-[1.2]">
-            Ready to define your legacy?
+            {messages.locations.cta.title}
           </h2>
           <p className="font-body-lg text-on-surface-variant mb-10 sm:mb-12 text-base sm:text-lg leading-[1.6]">
-            Our master barbers are ready to craft your individual style with the
-            precision of centuries-old tradition.
+            {messages.locations.cta.description}
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-6">
             <Link href="/book-now">
               <button className="bg-primary text-white px-12 sm:px-16 py-4 sm:py-5 font-label-caps uppercase tracking-widest text-xs sm:text-sm hover:opacity-90 transition-all">
-                Book Service
+                {messages.locations.cta.button}
               </button>
             </Link>
           </div>

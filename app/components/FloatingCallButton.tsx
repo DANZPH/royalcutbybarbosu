@@ -1,17 +1,20 @@
 'use client';
 
 import React from 'react';
+import { useI18n } from "@/lib/useI18n";
 
 const FloatingCallButton = () => {
+    const { messages } = useI18n();
+
     return (
         <div className="fixed bottom-6 right-6 z-50 flex items-center">
             <div className="bg-black text-white px-3 py-1 rounded-md mr-3 text-sm font-medium shadow-lg animate-in fade-in slide-in-from-right-2 duration-200">
-                Call us
+                {messages.floatingCall.label}
             </div>
             <a
                 href="tel:91939263"
                 className="bg-green-600 hover:bg-green-700 text-white p-4 rounded-full shadow-2xl transition-all duration-300 hover:scale-110 flex items-center justify-center group"
-                aria-label="Call us"
+                aria-label={messages.floatingCall.aria}
             >
                 <svg
                     xmlns="http://www.w3.org/2000/svg"

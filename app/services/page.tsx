@@ -3,10 +3,17 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useState, useEffect } from "react";
+import { buildLocalePathname } from "@/lib/i18n";
+import { useI18n } from "@/lib/useI18n";
 
 export default function ServicesPage() {
   const [activeSection, setActiveSection] = useState("haircut");
   const [navVisible, setNavVisible] = useState(true);
+  const { locale, messages } = useI18n();
+
+  const getLocalizedHref = (path: string) => {
+    return buildLocalePathname(path, locale);
+  };
 
   useEffect(() => {
     const observerOptions = {
@@ -47,17 +54,17 @@ export default function ServicesPage() {
       {/* BEGIN: Hero Section */}
       <section className="max-w-[1380px] mx-auto px-6 pt-10 sm:pt-12 pb-16 sm:pb-20">
         <p className="font-label-caps tracking-[0.3em] uppercase mb-4 text-[#E7CC89]">
-          Services
+          {messages.services.hero.label}
         </p>
         <h1 className="font-display-lg text-4xl sm:text-6xl md:text-8xl mb-10 sm:mb-12 leading-tight tracking-tight">
-          Crafted for<br />Confidence.
+          {messages.services.hero.titleLine1}<br />{messages.services.hero.titleLine2}
         </h1>
         <div className="grid md:grid-cols-12 gap-10 md:gap-12 items-center">
           {/* Hero Image Container */}
           <div className="md:col-span-7">
             <Image
               src="/picture1.jpg"
-              alt="Barbershop Interior"
+              alt={messages.services.alts.barbershopInterior}
               width={1200}
               height={800}
               className="w-full h-auto shadow-2xl hover:scale-[1.02] transition-transform duration-700"
@@ -66,15 +73,13 @@ export default function ServicesPage() {
           {/* Hero Text */}
           <div className="md:col-span-5 space-y-8">
             <p className="font-body-lg text-base sm:text-xl text-on-surface-variant leading-relaxed max-w-sm italic">
-              Keep your classic cut, try a new style, or personalize your trim.
-              At Royal Cut by Barbosu, every cut is crafted to bring out your
-              best. Book your appointment today.
+              {messages.services.hero.description}
             </p>
             <Link
-              href="/book-now"
+              href={getLocalizedHref("/book-now")}
               className="bg-black text-white px-10 sm:px-12 py-4 sm:py-5 font-label-caps text-xs sm:text-sm uppercase tracking-widest hover:bg-[#E7CC89] hover:text-black transition-all duration-300 inline-block"
             >
-              Book Now
+              {messages.common.bookNow}
             </Link>
           </div>
         </div>
@@ -85,7 +90,7 @@ export default function ServicesPage() {
       <section className="bg-inverse-surface text-white py-16 sm:py-24 md:py-32 overflow-hidden">
         <div className="max-w-[1380px] mx-auto px-6">
           <h2 className="font-display-lg text-4xl sm:text-6xl md:text-9xl leading-none">
-            Your style. Our craft.
+            {messages.services.banner.title}
           </h2>
         </div>
       </section>
@@ -106,7 +111,7 @@ export default function ServicesPage() {
                     className={`block py-3 sm:py-4 md:py-5 px-4 sm:px-6 md:px-8 font-label-caps uppercase tracking-widest text-[10px] sm:text-xs font-bold transition-all duration-300 ${activeSection === "haircut" ? "bg-[#E7CC89] text-black" : "text-white/70 hover:bg-[#E7CC89]/10 hover:text-[#E7CC89]"}`} 
                     href="#haircut"
                   >
-                    Haircut
+                    {messages.services.nav.haircut}
                   </a>
                 </li>
                 <li>
@@ -114,7 +119,7 @@ export default function ServicesPage() {
                     className={`block py-3 sm:py-4 md:py-5 px-4 sm:px-6 md:px-8 border-b border-[#E7CC89]/10 font-label-caps uppercase tracking-widest text-[10px] sm:text-xs transition-all duration-300 ${activeSection === "hair-styling" ? "bg-[#E7CC89] text-black" : "text-white/70 hover:bg-[#E7CC89]/10 md:hover:pl-12 hover:text-[#E7CC89]"}`} 
                     href="#hair-styling"
                   >
-                    Hair Styling
+                    {messages.services.nav.hairStyling}
                   </a>
                 </li>
                 <li>
@@ -122,7 +127,7 @@ export default function ServicesPage() {
                     className={`block py-3 sm:py-4 md:py-5 px-4 sm:px-6 md:px-8 border-b border-[#E7CC89]/10 font-label-caps uppercase tracking-widest text-[10px] sm:text-xs transition-all duration-300 ${activeSection === "hair-removal" ? "bg-[#E7CC89] text-black" : "text-white/70 hover:bg-[#E7CC89]/10 md:hover:pl-12 hover:text-[#E7CC89]"}`} 
                     href="#hair-removal"
                   >
-                    Hair Removal
+                    {messages.services.nav.hairRemoval}
                   </a>
                 </li>
                 {/* <li>
@@ -138,7 +143,7 @@ export default function ServicesPage() {
                     className={`block py-3 sm:py-4 md:py-5 px-4 sm:px-6 md:px-8 border-b border-[#E7CC89]/10 font-label-caps uppercase tracking-widest text-[10px] sm:text-xs transition-all duration-300 ${activeSection === "scalp-care" ? "bg-[#E7CC89] text-black" : "text-white/70 hover:bg-[#E7CC89]/10 md:hover:pl-12 hover:text-[#E7CC89]"}`} 
                     href="#scalp-care"
                   >
-                    Scalp Care
+                    {messages.services.nav.scalpCare}
                   </a>
                 </li>
                 <li>
@@ -146,7 +151,7 @@ export default function ServicesPage() {
                     className={`block py-3 sm:py-4 md:py-5 px-4 sm:px-6 md:px-8 border-b border-[#E7CC89]/10 font-label-caps uppercase tracking-widest text-[10px] sm:text-xs transition-all duration-300 ${activeSection === "facial-care" ? "bg-[#E7CC89] text-black" : "text-white/70 hover:bg-[#E7CC89]/10 md:hover:pl-12 hover:text-[#E7CC89]"}`} 
                     href="#facial-care"
                   >
-                    Facial Care
+                    {messages.services.nav.facialCare}
                   </a>
                 </li>
                 <li>
@@ -154,7 +159,7 @@ export default function ServicesPage() {
                     className={`block py-3 sm:py-4 md:py-5 px-4 sm:px-6 md:px-8 border-b border-[#E7CC89]/10 font-label-caps uppercase tracking-widest text-[10px] sm:text-xs transition-all duration-300 ${activeSection === "hair-color" ? "bg-[#E7CC89] text-black" : "text-white/70 hover:bg-[#E7CC89]/10 md:hover:pl-12 hover:text-[#E7CC89]"}`} 
                     href="#hair-color"
                   >
-                    Hair Color
+                    {messages.services.nav.hairColor}
                   </a>
                 </li>
                 <li>
@@ -162,19 +167,19 @@ export default function ServicesPage() {
                     className={`block py-3 sm:py-4 md:py-5 px-4 sm:px-6 md:px-8 font-label-caps uppercase tracking-widest text-[10px] sm:text-xs transition-all duration-300 ${activeSection === "other-services" ? "bg-[#E7CC89] text-black" : "text-white/70 hover:bg-[#E7CC89]/10 md:hover:pl-12 hover:text-[#E7CC89]"}`} 
                     href="#other-services"
                   >
-                    Other Services
+                    {messages.services.nav.otherServices}
                   </a>
                 </li>
               </ul>
               <div className="bg-[#E7CC89]/5 p-6 sm:p-8 md:p-10 border-l-4 border-[#E7CC89] backdrop-blur-sm">
                 <p className="font-body-sm text-[#E7CC89]/80 mb-6 leading-relaxed italic">
-                  Prices and service offerings may vary.
+                  {messages.services.sidebar.note}
                 </p>
                 <Link 
-                  href="/book-now" 
+                  href={getLocalizedHref("/book-now")} 
                   className="bg-[#E7CC89] text-black px-6 sm:px-8 py-3 sm:py-4 font-label-caps text-[10px] sm:text-xs font-bold uppercase tracking-widest w-full hover:bg-white transition-all inline-block text-center"
                 >
-                  Book Now
+                  {messages.common.bookNow}
                 </Link>
               </div>
             </nav>
@@ -188,7 +193,7 @@ export default function ServicesPage() {
               <div className="relative group overflow-hidden max-w-full md:max-w-[400px]">
                 <Image
                   src="/haircut.webp"
-                  alt="Haircut Detail"
+                  alt={messages.services.alts.haircut}
                   width={400}
                   height={500}
                   className="w-full h-[360px] sm:h-[450px] md:h-[500px] object-cover group-hover:scale-105 transition-transform duration-700"
@@ -197,28 +202,25 @@ export default function ServicesPage() {
               {/* Info Column */}
               <div className="flex flex-col justify-between py-4">
                 <div className="text-white">
-                  <h3 className="font-display-lg text-3xl sm:text-4xl md:text-5xl mb-6 sm:mb-8 text-[#E7CC89]">Haircut</h3>
+                  <h3 className="font-display-lg text-3xl sm:text-4xl md:text-5xl mb-6 sm:mb-8 text-[#E7CC89]">{messages.services.sections.haircut.title}</h3>
                   <p className="font-body-md text-sm sm:text-base text-white/70 mb-8 sm:mb-12 leading-relaxed italic">
-                    A good haircut goes a long way. From first trims to signature
-                    styles, we've been shaping generations with care, skill, and
-                    steady hands. Every cut is done with pride, just like we've
-                    always done it.
+                    {messages.services.sections.haircut.description}
                   </p>
                   <div className="space-y-6">
                     <div className="flex items-baseline justify-between w-full mb-2 before:content-[''] before:flex-1 before:border-b before:border-dotted before:border-[#E7CC89]/30 before:mx-4 before:order-2">
-                      <span className="order-1 whitespace-normal sm:whitespace-nowrap font-headline-md text-sm sm:text-lg">Haircut</span>
+                      <span className="order-1 whitespace-normal sm:whitespace-nowrap font-headline-md text-sm sm:text-lg">{messages.services.sections.haircut.items[0]}</span>
                       <span className="order-3 whitespace-nowrap font-display-lg text-base sm:text-xl text-[#E7CC89]">480 kr</span>
                     </div>
                     <div className="flex items-baseline justify-between w-full mb-2 before:content-[''] before:flex-1 before:border-b before:border-dotted before:border-[#E7CC89]/30 before:mx-4 before:order-2">
-                      <span className="order-1 whitespace-normal sm:whitespace-nowrap font-headline-md text-sm sm:text-lg">Haircut with Shampoo and Blowdry</span>
+                      <span className="order-1 whitespace-normal sm:whitespace-nowrap font-headline-md text-sm sm:text-lg">{messages.services.sections.haircut.items[1]}</span>
                       <span className="order-3 whitespace-nowrap font-display-lg text-base sm:text-xl text-[#E7CC89]">580 kr</span>
                     </div>
                     <div className="flex items-baseline justify-between w-full mb-2 before:content-[''] before:flex-1 before:border-b before:border-dotted before:border-[#E7CC89]/30 before:mx-4 before:order-2">
-                      <span className="order-1 whitespace-normal sm:whitespace-nowrap font-headline-md text-sm sm:text-lg">Head Shave / Skin Shave</span>
+                      <span className="order-1 whitespace-normal sm:whitespace-nowrap font-headline-md text-sm sm:text-lg">{messages.services.sections.haircut.items[2]}</span>
                       <span className="order-3 whitespace-nowrap font-display-lg text-base sm:text-xl text-[#E7CC89]">700 kr</span>
                     </div>
                     <div className="flex items-baseline justify-between w-full mb-2 before:content-[''] before:flex-1 before:border-b before:border-dotted before:border-[#E7CC89]/30 before:mx-4 before:order-2">
-                      <span className="order-1 whitespace-normal sm:whitespace-nowrap font-headline-md text-sm sm:text-lg">Hair Art</span>
+                      <span className="order-1 whitespace-normal sm:whitespace-nowrap font-headline-md text-sm sm:text-lg">{messages.services.sections.haircut.items[3]}</span>
                       <span className="order-3 whitespace-nowrap font-display-lg text-base sm:text-xl text-[#E7CC89]">1140 kr</span>
                     </div>
                   </div>
@@ -228,7 +230,7 @@ export default function ServicesPage() {
                     href="/book-now" 
                     className="border border-[#E7CC89]/40 text-[#E7CC89] px-8 sm:px-12 py-4 sm:py-5 font-label-caps text-[10px] sm:text-xs uppercase tracking-widest hover:bg-[#E7CC89] hover:text-black transition-all flex items-center justify-center gap-4 ml-auto w-fit"
                   >
-                    Book Now <span className="text-lg">›</span>
+                    {messages.common.bookNow} <span className="text-lg">›</span>
                   </Link>
                 </div>
               </div>
@@ -240,7 +242,7 @@ export default function ServicesPage() {
               <div className="relative group overflow-hidden max-w-full md:max-w-[400px]">
                 <Image
                   src="/picture2.jpg"
-                  alt="Hair Styling"
+                  alt={messages.services.alts.hairStyling}
                   width={400}
                   height={550}
                   className="w-full h-[360px] sm:h-[480px] md:h-[550px] object-cover group-hover:scale-105 transition-transform duration-700"
@@ -250,62 +252,60 @@ export default function ServicesPage() {
               <div className="flex flex-col justify-between py-4">
                 <div className="text-white">
                   <div className="flex flex-col sm:flex-row sm:justify-between sm:items-baseline gap-4 mb-6 sm:mb-8">
-                    <h3 className="font-display-lg text-3xl sm:text-4xl md:text-5xl text-[#E7CC89]">Hair Styling</h3>
+                    <h3 className="font-display-lg text-3xl sm:text-4xl md:text-5xl text-[#E7CC89]">{messages.services.sections.hairStyling.title}</h3>
                     <span className="font-label-caps text-[10px] uppercase tracking-[0.2em] font-bold flex items-center gap-2 cursor-help hover:text-[#E7CC89] transition-colors text-white/50">
-                      The Guide
+                      {messages.services.sections.hairStyling.guideLabel}
                       <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5"></path>
                       </svg>
                     </span>
                   </div>
                   <p className="font-body-md text-sm sm:text-base text-white/70 mb-8 sm:mb-12 leading-relaxed italic">
-                    Big day or just another good hair day, we've got you covered.
-                    Our barbers and stylists know how to bring out your best with
-                    styling that holds up, feels right, and fits your routine.
+                    {messages.services.sections.hairStyling.description}
                   </p>
                   <div className="space-y-6 mb-10 sm:mb-12">
                     <div className="flex items-baseline justify-between w-full mb-2 before:content-[''] before:flex-1 before:border-b before:border-dotted before:border-[#E7CC89]/30 before:mx-4 before:order-2">
-                      <span className="order-1 whitespace-normal sm:whitespace-nowrap font-headline-md text-sm sm:text-lg">Shampoo</span>
+                      <span className="order-1 whitespace-normal sm:whitespace-nowrap font-headline-md text-sm sm:text-lg">{messages.services.sections.hairStyling.items[0]}</span>
                       <span className="order-3 whitespace-nowrap font-display-lg text-base sm:text-xl text-[#E7CC89]">300 kr</span>
                     </div>
                     <div className="flex items-baseline justify-between w-full mb-2 before:content-[''] before:flex-1 before:border-b before:border-dotted before:border-[#E7CC89]/30 before:mx-4 before:order-2">
-                      <span className="order-1 whitespace-normal sm:whitespace-nowrap font-headline-md text-sm sm:text-lg">Blowdry Short</span>
+                      <span className="order-1 whitespace-normal sm:whitespace-nowrap font-headline-md text-sm sm:text-lg">{messages.services.sections.hairStyling.items[1]}</span>
                       <span className="order-3 whitespace-nowrap font-display-lg text-base sm:text-xl text-[#E7CC89]">300 kr</span>
                     </div>
                     <div className="flex items-baseline justify-between w-full mb-2 before:content-[''] before:flex-1 before:border-b before:border-dotted before:border-[#E7CC89]/30 before:mx-4 before:order-2">
-                      <span className="order-1 whitespace-normal sm:whitespace-nowrap font-headline-md text-sm sm:text-lg">Blowdry Long</span>
+                      <span className="order-1 whitespace-normal sm:whitespace-nowrap font-headline-md text-sm sm:text-lg">{messages.services.sections.hairStyling.items[2]}</span>
                       <span className="order-3 whitespace-nowrap font-display-lg text-base sm:text-xl text-[#E7CC89]">450 kr</span>
                     </div>
                     <div className="flex items-baseline justify-between w-full mb-2 before:content-[''] before:flex-1 before:border-b before:border-dotted before:border-[#E7CC89]/30 before:mx-4 before:order-2">
-                      <span className="order-1 whitespace-normal sm:whitespace-nowrap font-headline-md text-sm sm:text-lg">Iron</span>
+                      <span className="order-1 whitespace-normal sm:whitespace-nowrap font-headline-md text-sm sm:text-lg">{messages.services.sections.hairStyling.items[3]}</span>
                       <span className="order-3 whitespace-nowrap font-display-lg text-base sm:text-xl text-[#E7CC89]">550 kr</span>
                     </div>
                     <div className="flex items-baseline justify-between w-full mb-2 before:content-[''] before:flex-1 before:border-b before:border-dotted before:border-[#E7CC89]/30 before:mx-4 before:order-2">
-                      <span className="order-1 whitespace-normal sm:whitespace-nowrap font-headline-md text-sm sm:text-lg">Down Perm with Xtenso</span>
+                      <span className="order-1 whitespace-normal sm:whitespace-nowrap font-headline-md text-sm sm:text-lg">{messages.services.sections.hairStyling.items[4]}</span>
                       <span className="order-3 whitespace-nowrap font-display-lg text-base sm:text-xl text-[#E7CC89]">2000 kr</span>
                     </div>
                   </div>
                   {/* Specialty Perm Section */}
                   <div className="border-t border-[#E7CC89]/20 pt-10">
                     <h4 className="font-display-md italic text-xl sm:text-2xl mb-6 text-[#E7CC89]">
-                      Cold Perm with Dulcia
+                      {messages.services.sections.hairStyling.permTitle}
                     </h4>
                     <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8 text-white">
                       <div className="group">
                         <p className="font-label-caps text-[10px] uppercase text-[#E7CC89]/60 font-bold tracking-[0.2em] mb-2 group-hover:text-[#E7CC89] transition-colors">
-                          Short
+                          {messages.services.sections.hairStyling.permSizes[0]}
                         </p>
                         <p className="font-display-lg text-2xl sm:text-3xl">2500 kr</p>
                       </div>
                       <div className="group">
                         <p className="font-label-caps text-[10px] uppercase text-[#E7CC89]/60 font-bold tracking-[0.2em] mb-2 group-hover:text-[#E7CC89] transition-colors">
-                          Medium
+                          {messages.services.sections.hairStyling.permSizes[1]}
                         </p>
                         <p className="font-display-lg text-2xl sm:text-3xl">3000 kr</p>
                       </div>
                       <div className="group">
                         <p className="font-label-caps text-[10px] uppercase text-[#E7CC89]/60 font-bold tracking-[0.2em] mb-2 group-hover:text-[#E7CC89] transition-colors">
-                          Long
+                          {messages.services.sections.hairStyling.permSizes[2]}
                         </p>
                         <p className="font-display-lg text-2xl sm:text-3xl">3500 kr</p>
                       </div>
@@ -317,7 +317,7 @@ export default function ServicesPage() {
                     href="/book-now" 
                     className="border border-[#E7CC89]/40 text-[#E7CC89] px-8 sm:px-12 py-4 sm:py-5 font-label-caps text-[10px] sm:text-xs uppercase tracking-widest hover:bg-[#E7CC89] hover:text-black transition-all flex items-center justify-center gap-4 ml-auto w-fit"
                   >
-                    Book Now <span className="text-lg">›</span>
+                    {messages.common.bookNow} <span className="text-lg">›</span>
                   </Link>
                 </div>
               </div>
@@ -328,7 +328,7 @@ export default function ServicesPage() {
               <div className="relative group overflow-hidden max-w-full md:max-w-[400px]">
                 <Image
                   src="/hair-removal.jpg"
-                  alt="Hair Removal"
+                  alt={messages.services.alts.hairRemoval}
                   width={400}
                   height={550}
                   className="w-full h-[360px] sm:h-[480px] md:h-[550px] object-cover group-hover:scale-105 transition-transform duration-700"
@@ -336,22 +336,21 @@ export default function ServicesPage() {
               </div>
               <div className="flex flex-col justify-between py-4">
                 <div className="text-white">
-                  <h3 className="font-display-lg text-3xl sm:text-4xl md:text-5xl mb-6 sm:mb-8 text-[#E7CC89]">Hair Removal</h3>
+                  <h3 className="font-display-lg text-3xl sm:text-4xl md:text-5xl mb-6 sm:mb-8 text-[#E7CC89]">{messages.services.sections.hairRemoval.title}</h3>
                   <p className="font-body-md text-sm sm:text-base text-white/70 mb-8 sm:mb-12 leading-relaxed italic">
-                    Precision grooming for a clean, sharp look. Our specialized hair removal techniques 
-                    ensure comfort and lasting results, tailored to your skin type and style.
+                    {messages.services.sections.hairRemoval.description}
                   </p>
                   <div className="space-y-6">
                     <div className="flex items-baseline justify-between w-full mb-2 before:content-[''] before:flex-1 before:border-b before:border-dotted before:border-[#E7CC89]/30 before:mx-4 before:order-2">
-                      <span className="order-1 whitespace-normal sm:whitespace-nowrap font-headline-md text-sm sm:text-lg">Eyebrow Shaping</span>
+                      <span className="order-1 whitespace-normal sm:whitespace-nowrap font-headline-md text-sm sm:text-lg">{messages.services.sections.hairRemoval.items[0]}</span>
                       <span className="order-3 whitespace-nowrap font-display-lg text-base sm:text-xl text-[#E7CC89]">150 kr</span>
                     </div>
                     <div className="flex items-baseline justify-between w-full mb-2 before:content-[''] before:flex-1 before:border-b before:border-dotted before:border-[#E7CC89]/30 before:mx-4 before:order-2">
-                      <span className="order-1 whitespace-normal sm:whitespace-nowrap font-headline-md text-sm sm:text-lg">Nose / Ear Waxing</span>
+                      <span className="order-1 whitespace-normal sm:whitespace-nowrap font-headline-md text-sm sm:text-lg">{messages.services.sections.hairRemoval.items[1]}</span>
                       <span className="order-3 whitespace-nowrap font-display-lg text-base sm:text-xl text-[#E7CC89]">100 kr</span>
                     </div>
                     <div className="flex items-baseline justify-between w-full mb-2 before:content-[''] before:flex-1 before:border-b before:border-dotted before:border-[#E7CC89]/30 before:mx-4 before:order-2">
-                      <span className="order-1 whitespace-normal sm:whitespace-nowrap font-headline-md text-sm sm:text-lg">Full Face Grooming</span>
+                      <span className="order-1 whitespace-normal sm:whitespace-nowrap font-headline-md text-sm sm:text-lg">{messages.services.sections.hairRemoval.items[2]}</span>
                       <span className="order-3 whitespace-nowrap font-display-lg text-base sm:text-xl text-[#E7CC89]">400 kr</span>
                     </div>
                   </div>
@@ -361,7 +360,7 @@ export default function ServicesPage() {
                     href="/book-now" 
                     className="border border-[#E7CC89]/40 text-[#E7CC89] px-8 sm:px-12 py-4 sm:py-5 font-label-caps text-[10px] sm:text-xs uppercase tracking-widest hover:bg-[#E7CC89] hover:text-black transition-all flex items-center justify-center gap-4 ml-auto w-fit"
                   >
-                    Book Now <span className="text-lg">›</span>
+                    {messages.common.bookNow} <span className="text-lg">›</span>
                   </Link>
                 </div>
               </div>
@@ -416,7 +415,7 @@ export default function ServicesPage() {
               <div className="relative group overflow-hidden max-w-[400px]">
                 <Image
                   src="/haircolor.webp"
-                  alt="Scalp Care"
+                  alt={messages.services.alts.scalpCare}
                   width={400}
                   height={550}
                   className="w-full h-[550px] object-cover  group-hover:scale-105 transition-transform duration-700"
@@ -424,18 +423,17 @@ export default function ServicesPage() {
               </div>
               <div className="flex flex-col justify-between py-4">
                 <div className="text-white">
-                  <h3 className="font-display-lg text-5xl mb-8 text-[#E7CC89]">Scalp Care</h3>
+                  <h3 className="font-display-lg text-5xl mb-8 text-[#E7CC89]">{messages.services.sections.scalpCare.title}</h3>
                   <p className="font-body-md text-white/70 mb-12 leading-relaxed italic">
-                    The foundation of healthy hair is a healthy scalp. Our deep-cleansing and 
-                    nourishing treatments target dryness, congestion, and promote hair growth.
+                    {messages.services.sections.scalpCare.description}
                   </p>
                   <div className="space-y-6">
                     <div className="flex items-baseline justify-between w-full mb-2 before:content-[''] before:flex-1 before:border-b before:border-dotted before:border-[#E7CC89]/30 before:mx-4 before:order-2">
-                      <span className="order-1 whitespace-nowrap font-headline-md text-lg">Detoxifying Scrub</span>
+                      <span className="order-1 whitespace-nowrap font-headline-md text-lg">{messages.services.sections.scalpCare.items[0]}</span>
                       <span className="order-3 whitespace-nowrap font-display-lg text-xl text-[#E7CC89]">350 kr</span>
                     </div>
                     <div className="flex items-baseline justify-between w-full mb-2 before:content-[''] before:flex-1 before:border-b before:border-dotted before:border-[#E7CC89]/30 before:mx-4 before:order-2">
-                      <span className="order-1 whitespace-nowrap font-headline-md text-lg">Nourishing Oil Therapy</span>
+                      <span className="order-1 whitespace-nowrap font-headline-md text-lg">{messages.services.sections.scalpCare.items[1]}</span>
                       <span className="order-3 whitespace-nowrap font-display-lg text-xl text-[#E7CC89]">400 kr</span>
                     </div>
                   </div>
@@ -445,7 +443,7 @@ export default function ServicesPage() {
                     href="/book-now" 
                     className="border border-[#E7CC89]/40 text-[#E7CC89] px-12 py-5 font-label-caps text-xs uppercase tracking-widest hover:bg-[#E7CC89] hover:text-black transition-all flex items-center justify-center gap-4 ml-auto w-fit"
                   >
-                    Book Now <span className="text-lg">›</span>
+                    {messages.common.bookNow} <span className="text-lg">›</span>
                   </Link>
                 </div>
               </div>
@@ -456,7 +454,7 @@ export default function ServicesPage() {
               <div className="relative group overflow-hidden max-w-[400px]">
                 <Image
                   src="/haircolor.webp"
-                  alt="Facial Care"
+                  alt={messages.services.alts.facialCare}
                   width={400}
                   height={550}
                   className="w-full h-[550px] object-cover  group-hover:scale-105 transition-transform duration-700"
@@ -464,18 +462,17 @@ export default function ServicesPage() {
               </div>
               <div className="flex flex-col justify-between py-4">
                 <div className="text-white">
-                  <h3 className="font-display-lg text-5xl mb-8 text-[#E7CC89]">Facial Care</h3>
+                  <h3 className="font-display-lg text-5xl mb-8 text-[#E7CC89]">{messages.services.sections.facialCare.title}</h3>
                   <p className="font-body-md text-white/70 mb-12 leading-relaxed italic">
-                    Revitalize your skin with our professional facial treatments. We use premium 
-                    products to cleanse, exfoliate, and hydrate, leaving you with a refreshed glow.
+                    {messages.services.sections.facialCare.description}
                   </p>
                   <div className="space-y-6">
                     <div className="flex items-baseline justify-between w-full mb-2 before:content-[''] before:flex-1 before:border-b before:border-dotted before:border-[#E7CC89]/30 before:mx-4 before:order-2">
-                      <span className="order-1 whitespace-nowrap font-headline-md text-lg">Express Facial</span>
+                      <span className="order-1 whitespace-nowrap font-headline-md text-lg">{messages.services.sections.facialCare.items[0]}</span>
                       <span className="order-3 whitespace-nowrap font-display-lg text-xl text-[#E7CC89]">450 kr</span>
                     </div>
                     <div className="flex items-baseline justify-between w-full mb-2 before:content-[''] before:flex-1 before:border-b before:border-dotted before:border-[#E7CC89]/30 before:mx-4 before:order-2">
-                      <span className="order-1 whitespace-nowrap font-headline-md text-lg">Hot Towel Cleanse</span>
+                      <span className="order-1 whitespace-nowrap font-headline-md text-lg">{messages.services.sections.facialCare.items[1]}</span>
                       <span className="order-3 whitespace-nowrap font-display-lg text-xl text-[#E7CC89]">300 kr</span>
                     </div>
                   </div>
@@ -485,7 +482,7 @@ export default function ServicesPage() {
                     href="/book-now" 
                     className="border border-[#E7CC89]/40 text-[#E7CC89] px-12 py-5 font-label-caps text-xs uppercase tracking-widest hover:bg-[#E7CC89] hover:text-black transition-all flex items-center justify-center gap-4 ml-auto w-fit"
                   >
-                    Book Now <span className="text-lg">›</span>
+                    {messages.common.bookNow} <span className="text-lg">›</span>
                   </Link>
                 </div>
               </div>
@@ -496,7 +493,7 @@ export default function ServicesPage() {
               <div className="relative group overflow-hidden max-w-[400px]">
                 <Image
                   src="/haircolor.webp"
-                  alt="Hair Color"
+                  alt={messages.services.alts.hairColor}
                   width={400}
                   height={550}
                   className="w-full h-[550px] object-cover group-hover:scale-105 transition-transform duration-700"
@@ -504,18 +501,17 @@ export default function ServicesPage() {
               </div>
               <div className="flex flex-col justify-between py-4">
                 <div className="text-white">
-                  <h3 className="font-display-lg text-5xl mb-8 text-[#E7CC89]">Hair Color</h3>
+                  <h3 className="font-display-lg text-5xl mb-8 text-[#E7CC89]">{messages.services.sections.hairColor.title}</h3>
                   <p className="font-body-md text-white/70 mb-12 leading-relaxed italic">
-                    Transform your look with expert color services. From subtle grey blending to 
-                    bold new shades, our colorists use techniques that maintain hair health.
+                    {messages.services.sections.hairColor.description}
                   </p>
                   <div className="space-y-6">
                     <div className="flex items-baseline justify-between w-full mb-2 before:content-[''] before:flex-1 before:border-b before:border-dotted before:border-[#E7CC89]/30 before:mx-4 before:order-2">
-                      <span className="order-1 whitespace-nowrap font-headline-md text-lg">Grey Blending</span>
+                      <span className="order-1 whitespace-nowrap font-headline-md text-lg">{messages.services.sections.hairColor.items[0]}</span>
                       <span className="order-3 whitespace-nowrap font-display-lg text-xl text-[#E7CC89]">800 kr</span>
                     </div>
                     <div className="flex items-baseline justify-between w-full mb-2 before:content-[''] before:flex-1 before:border-b before:border-dotted before:border-[#E7CC89]/30 before:mx-4 before:order-2">
-                      <span className="order-1 whitespace-nowrap font-headline-md text-lg">Full Color Appointment</span>
+                      <span className="order-1 whitespace-nowrap font-headline-md text-lg">{messages.services.sections.hairColor.items[1]}</span>
                       <span className="order-3 whitespace-nowrap font-display-lg text-xl text-[#E7CC89]">1200 kr+</span>
                     </div>
                   </div>
@@ -525,7 +521,7 @@ export default function ServicesPage() {
                     href="/book-now" 
                     className="border border-[#E7CC89]/40 text-[#E7CC89] px-12 py-5 font-label-caps text-xs uppercase tracking-widest hover:bg-[#E7CC89] hover:text-black transition-all flex items-center justify-center gap-4 ml-auto w-fit"
                   >
-                    Book Now <span className="text-lg">›</span>
+                    {messages.common.bookNow} <span className="text-lg">›</span>
                   </Link>
                 </div>
               </div>
@@ -536,7 +532,7 @@ export default function ServicesPage() {
               <div className="relative group overflow-hidden max-w-[400px]">
                 <Image
                   src="/haircolor.webp"
-                  alt="Other Services"
+                  alt={messages.services.alts.otherServices}
                   width={400}
                   height={550}
                   className="w-full h-[550px] object-cover  group-hover:scale-105 transition-transform duration-700"
@@ -544,18 +540,17 @@ export default function ServicesPage() {
               </div>
               <div className="flex flex-col justify-between py-4">
                 <div className="text-white">
-                  <h3 className="font-display-lg text-5xl mb-8 text-[#E7CC89]">Other Services</h3>
+                  <h3 className="font-display-lg text-5xl mb-8 text-[#E7CC89]">{messages.services.sections.otherServices.title}</h3>
                   <p className="font-body-md text-white/70 mb-12 leading-relaxed italic">
-                    Specialized grooming needs handled with the same Royal precision. If you don't 
-                    see what you need, just ask—we are masters of all traditional craft.
+                    {messages.services.sections.otherServices.description}
                   </p>
                   <div className="space-y-6">
                     <div className="flex items-baseline justify-between w-full mb-2 before:content-[''] before:flex-1 before:border-b before:border-dotted before:border-[#E7CC89]/30 before:mx-4 before:order-2">
-                      <span className="order-1 whitespace-nowrap font-headline-md text-lg">Beard Trim</span>
+                      <span className="order-1 whitespace-nowrap font-headline-md text-lg">{messages.services.sections.otherServices.items[0]}</span>
                       <span className="order-3 whitespace-nowrap font-display-lg text-xl text-[#E7CC89]">350 kr</span>
                     </div>
                     <div className="flex items-baseline justify-between w-full mb-2 before:content-[''] before:flex-1 before:border-b before:border-dotted before:border-[#E7CC89]/30 before:mx-4 before:order-2">
-                      <span className="order-1 whitespace-nowrap font-headline-md text-lg">Luxury Shave</span>
+                      <span className="order-1 whitespace-nowrap font-headline-md text-lg">{messages.services.sections.otherServices.items[1]}</span>
                       <span className="order-3 whitespace-nowrap font-display-lg text-xl text-[#E7CC89]">500 kr</span>
                     </div>
                   </div>
@@ -565,7 +560,7 @@ export default function ServicesPage() {
                     href="/book-now" 
                     className="border border-[#E7CC89]/40 text-[#E7CC89] px-12 py-5 font-label-caps text-xs uppercase tracking-widest hover:bg-[#E7CC89] hover:text-black transition-all flex items-center justify-center gap-4 ml-auto w-fit"
                   >
-                    Book Now <span className="text-lg">›</span>
+                    {messages.common.bookNow} <span className="text-lg">›</span>
                   </Link>
                 </div>
               </div>
@@ -584,21 +579,20 @@ export default function ServicesPage() {
             content_cut
           </span>
           <h2 className="font-headline-xl text-5xl md:text-[48px] mb-8 leading-[1.2]">
-            Ready to define your legacy?
+            {messages.services.cta.title}
           </h2>
           <p className="font-body-lg text-on-surface-variant mb-12 text-lg leading-[1.6]">
-            Our master barbers are ready to craft your individual style with the
-            precision of centuries-old tradition.
+            {messages.services.cta.description}
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-6">
             <Link href="/book-now">
               <button className="bg-primary text-white px-16 py-5 font-label-caps uppercase tracking-widest text-sm hover:opacity-90 transition-all">
-                Book Service
+                {messages.services.cta.primary}
               </button>
             </Link>
             <Link href="/locations">
             <button className="border-b-2 border-primary text-on-surface px-8 py-5 font-label-caps uppercase tracking-widest text-sm hover:bg-primary-container transition-all">
-              View Locations
+              {messages.services.cta.secondary}
             </button>
             </Link>
           </div>

@@ -2,11 +2,22 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useState, useEffect } from "react";
+import {
+  buildLocalePathname,
+  LOCALES,
+  LOCALE_LABELS,
+  Locale,
+  stripLocaleFromPathname,
+} from "@/lib/i18n";
+import { useI18n } from "@/lib/useI18n";
 
 export default function Navbar() {
   const pathname = usePathname();
+  const searchParams = useSearchParams();
+  const router = useRouter();
+  const { locale, messages } = useI18n();
   const [isVisible, setIsVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -31,8 +42,14 @@ export default function Navbar() {
     setIsMenuOpen(false);
   }, [pathname]);
 
+  const normalizedPathname = stripLocaleFromPathname(pathname);
+
+  const getLocalizedHref = (path: string) => {
+    return buildLocalePathname(path, locale);
+  };
+
   const navLinkClass = (path: string) => {
-    const isActive = pathname === path;
+    const isActive = normalizedPathname === path;
     return `font-serif uppercase tracking-widest text-sm transition-colors duration-300 pb-1 ${
       isActive
         ? "border-b-2 border-[#E7CC89] text-black"
@@ -40,11 +57,22 @@ export default function Navbar() {
     }`;
   };
 
+  const handleLocaleChange = (nextLocale: Locale) => {
+    if (nextLocale === locale) {
+      return;
+    }
+    const nextPathname = buildLocalePathname(pathname, nextLocale);
+    const queryString = searchParams?.toString();
+    const nextUrl = queryString ? `${nextPathname}?${queryString}` : nextPathname;
+    document.cookie = `NEXT_LOCALE=${nextLocale}; path=/; max-age=31536000`;
+    router.replace(nextUrl);
+  };
+
   return (
     <>
       {/* Top Banner */}
       <div className="fixed top-0 w-full h-[40px] bg-[#E7CC89] flex items-center justify-center z-[60] text-[#1c1c18] text-sm font-medium">
-        Prefer to book by phone? Call us at <span className="font-bold ml-1">91939263</span>
+        {messages.nav.phoneBanner} <span className="font-bold ml-1">91939263</span>
       </div>
 
       {/* TopAppBar */}
@@ -54,29 +82,50 @@ export default function Navbar() {
           id="main-navbar"
           data-visible={isVisible}
         >
-          <Link href="/" className="flex flex-col items-center">
+          <Link href={getLocalizedHref("/")} className="flex flex-col items-center">
             <Image
               src="/crown.png"
-              alt="Royal Crown"
+              alt={messages.common.royalCrownAlt}
               width={42}
               height={42}
-              className="h-auto opacity-80 mb-1"
+              className="opacity-80 mb-1"
+              style={{ width: 'auto', height: 'auto' }}
             />
             <span className="text-xl font-serif font-bold text-black tracking-tight leading-none">ROYAL CUT</span>
             <span className="text-xl text-gray-600" style={{ fontFamily: "var(--font-ephesis)" }}>by Barbosu</span>
           </Link>
           <nav className="hidden md:flex gap-8 items-center h-full">
-            <Link className={navLinkClass("/")} href="/">Heritage</Link>
-            <Link className={navLinkClass("/services")} href="/services">Services</Link>
-            <Link className={navLinkClass("/locations")} href="/locations">Locations</Link>
+            <Link className={navLinkClass("/")} href={getLocalizedHref("/")}>{messages.nav.heritage}</Link>
+            <Link className={navLinkClass("/services")} href={getLocalizedHref("/services")}>{messages.nav.services}</Link>
+            <Link className={navLinkClass("/locations")} href={getLocalizedHref("/locations")}>{messages.nav.locations}</Link>
           </nav>
           <div className="flex items-center gap-4 md:gap-6">
             <span className="font-serif text-[#705c25] uppercase tracking-widest text-sm hidden lg:block">91939263</span>
+            <div className="hidden sm:flex items-center gap-2" role="group" aria-label={messages.common.language}>
+              {LOCALES.map((option) => {
+                const isActive = option === locale;
+                return (
+                  <button
+                    key={option}
+                    type="button"
+                    onClick={() => handleLocaleChange(option)}
+                    aria-pressed={isActive}
+                    className={`px-3 py-2 text-[10px] font-label-caps uppercase tracking-widest border transition-colors ${
+                      isActive
+                        ? "bg-[#E7CC89] text-black border-[#1c1c18]"
+                        : "border-[#E7CC89]/40 text-[#705c25] hover:bg-[#E7CC89]/20"
+                    }`}
+                  >
+                    {LOCALE_LABELS[option]}
+                  </button>
+                );
+              })}
+            </div>
             <Link 
-              href="/book-now" 
+              href={getLocalizedHref("/book-now")} 
               className="bg-[#1c1c18] text-[#e7cc89] px-6 py-3 font-label-caps uppercase tracking-widest hover:opacity-90 transition-opacity"
             >
-              Book Now
+              {messages.common.bookNow}
             </Link>
           </div>
         </div>
@@ -87,7 +136,7 @@ export default function Navbar() {
           aria-controls="mobile-nav"
           onClick={() => setIsMenuOpen((open) => !open)}
         >
-          <span className="sr-only">Toggle navigation</span>
+          <span className="sr-only">{messages.nav.toggleNavigation}</span>
           <span className="material-symbols-outlined text-[24px]">
             {isMenuOpen ? "keyboard_arrow_up" : "keyboard_arrow_down"}
           </span>
@@ -97,9 +146,29 @@ export default function Navbar() {
           className={`md:hidden absolute left-0 right-0 top-full bg-white/95 backdrop-blur-md border-b border-[#E7CC89]/30 transition-all duration-300 ${isMenuOpen ? "opacity-100 translate-y-0 pointer-events-auto" : "opacity-0 -translate-y-2 pointer-events-none"}`}
         >
           <div className="max-w-[1380px] mx-auto px-6 py-6 flex flex-col gap-4">
-            <Link className={navLinkClass("/")} href="/">Heritage</Link>
-            <Link className={navLinkClass("/services")} href="/services">Services</Link>
-            <Link className={navLinkClass("/locations")} href="/locations">Locations</Link>
+            <Link className={navLinkClass("/")} href={getLocalizedHref("/")}>{messages.nav.heritage}</Link>
+            <Link className={navLinkClass("/services")} href={getLocalizedHref("/services")}>{messages.nav.services}</Link>
+            <Link className={navLinkClass("/locations")} href={getLocalizedHref("/locations")}>{messages.nav.locations}</Link>
+            <div className="flex items-center gap-2 pt-2" role="group" aria-label={messages.common.language}>
+              {LOCALES.map((option) => {
+                const isActive = option === locale;
+                return (
+                  <button
+                    key={option}
+                    type="button"
+                    onClick={() => handleLocaleChange(option)}
+                    aria-pressed={isActive}
+                    className={`px-3 py-2 text-[10px] font-label-caps uppercase tracking-widest border transition-colors ${
+                      isActive
+                        ? "bg-[#E7CC89] text-black border-[#1c1c18]"
+                        : "border-[#E7CC89]/40 text-[#705c25] hover:bg-[#E7CC89]/20"
+                    }`}
+                  >
+                    {LOCALE_LABELS[option]}
+                  </button>
+                );
+              })}
+            </div>
           </div>
         </nav>
       </header>
