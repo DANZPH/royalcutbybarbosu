@@ -19,10 +19,10 @@ export async function sendBookingNotification({
   requests,
   isNewCustomer
 }: BookingNotificationInput) {
-  const apiKey = process.env.BREVO_API_KEY;
-  const senderEmail = process.env.BREVO_SENDER_EMAIL;
-  const senderName = process.env.BREVO_SENDER_NAME || 'Royal Cut By Barbosu';
-  const notificationEmail = process.env.BREVO_NOTIFICATION_EMAIL || senderEmail;
+  const apiKey = process.env.BREVO_API_KEY?.trim();
+  const senderEmail = process.env.BREVO_SENDER_EMAIL?.trim();
+  const senderName = process.env.BREVO_SENDER_NAME?.trim() || 'Royal Cut By Barbosu';
+  const notificationEmail = process.env.BREVO_NOTIFICATION_EMAIL?.trim() || senderEmail;
 
   if (!apiKey) {
     return { success: false, error: new Error('Missing BREVO_API_KEY') };
@@ -90,9 +90,16 @@ export async function sendBookingNotification({
 
     if (!response.ok) {
       console.error('Brevo API error:', response.status, data);
+      if (response.status === 401) {
+        console.error('Brevo unauthorized: verify that BREVO_API_KEY is enabled and that your Brevo account is active.');
+      }
+      const errorMessage = typeof data === 'object' && data && 'message' in data
+        ? (data as { message: string }).message
+        : `Brevo API error (status ${response.status})`;
       return {
         success: false,
-        error: new Error(`Brevo API error (status ${response.status})`)
+        error: new Error(errorMessage),
+        brevoError: data,
       };
     }
 
