@@ -19,12 +19,16 @@ export async function sendBookingNotification({
   requests,
   isNewCustomer
 }: BookingNotificationInput) {
-  const apiKey = typeof process !== 'undefined' ? process.env.BREVO_API_KEY : undefined;
-  const senderEmail = typeof process !== 'undefined' ? process.env.BREVO_SENDER_EMAIL : undefined;
-  const senderName = typeof process !== 'undefined' ? process.env.BREVO_SENDER_NAME : 'Royal Cut By Barbosu';
-  const notificationEmail = typeof process !== 'undefined'
-    ? process.env.BREVO_NOTIFICATION_EMAIL || senderEmail
-    : senderEmail;
+  const env = (() => {
+    if (typeof process !== 'undefined' && process.env) return process.env as Record<string, string | undefined>;
+    if (typeof globalThis !== 'undefined') return (globalThis as any) as Record<string, string | undefined>;
+    return {} as Record<string, string | undefined>;
+  })();
+
+  const apiKey = env.BREVO_API_KEY;
+  const senderEmail = env.BREVO_SENDER_EMAIL;
+  const senderName = env.BREVO_SENDER_NAME || 'Royal Cut By Barbosu';
+  const notificationEmail = env.BREVO_NOTIFICATION_EMAIL || senderEmail;
 
   if (!apiKey) {
     return { success: false, error: new Error('Missing BREVO_API_KEY') };
