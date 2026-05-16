@@ -2,9 +2,9 @@
   "$schema": "https://developers.cloudflare.com/workers/schema/1.0.0",
   "name": "royalcutbybarbosu",
   "compatibility_date": "2026-05-16",
-  "main": "worker.js",
+  "main": ".vercel/output/static/_worker.js",
   "build": {
-    "command": "npm run build",
+    "command": "npx @cloudflare/next-on-pages --outdir .vercel/output/static",
     "cwd": "."
   }
 }
