@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Noto_Serif, Manrope, Ephesis } from "next/font/google";
+import { Suspense } from "react";
 import "./globals.css";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
@@ -47,7 +48,9 @@ export default function RootLayout({
         suppressHydrationWarning
       >
         <LocaleHtmlLang />
-        <Navbar />
+        <Suspense fallback={null}>
+          <Navbar />
+        </Suspense>
         {children}
         <Footer />
         <FloatingCallButton />
