@@ -6,5 +6,11 @@
   "build": {
     "command": "npx @cloudflare/next-on-pages --outdir .vercel/output/static",
     "cwd": "."
+  },
+  "vars": {
+    "BREVO_API_KEY": "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",
+    "BREVO_SENDER_EMAIL": "royalcutbybarbosu@gmail.com",
+    "BREVO_NOTIFICATION_EMAIL": "royalcutbybarbosu@gmail.com",
+    "BREVO_SENDER_NAME": "Royal Cut By Barbosu"
   }
 }
